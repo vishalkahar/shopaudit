@@ -1,0 +1,27 @@
+# Boll & Branch Ecommerce Testing Configuration
+# Premium bedding and home goods website
+
+baseUrl: "https://www.bollandbranch.com"
+productUrls:
+  - "https://www.bollandbranch.com/products/signature-hemmed-sheet-set"
+  - "https://www.bollandbranch.com/products/signature-hemmed-duvet-set"
+  - "https://www.bollandbranch.com/products/waffle-bed-blanket"
+  - "https://www.bollandbranch.com/products/dream-bed-blanket"
+timeout: 30000
+retryAttempts: 3
+viewport:
+  width: 1920
+  height: 1080
+headless: true
+customHeaders:
+  User-Agent: "ShopAudit/1.0.0"
+  Accept-Language: "en-US,en;q=0.9"
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+  Accept-Encoding: "gzip, deflate, br"
+  Connection: "keep-alive"
+  Upgrade-Insecure-Requests: "1"
+cookies:
+  - name: "session_id"
+    value: "your-session-value"
+    domain: ".bollandbranch.com"
+    path: "/" 

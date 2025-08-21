@@ -1,0 +1,12 @@
+baseUrl: https://example-store.myshopify.com
+productUrls:
+  - https://example-store.myshopify.com/products/sample-product-1
+  - https://example-store.myshopify.com/products/sample-product-2
+timeout: 30000
+retryAttempts: 3
+viewport:
+  width: 1920
+  height: 1080
+headless: true
+customHeaders:
+  User-Agent: ShopAudit/1.0.0

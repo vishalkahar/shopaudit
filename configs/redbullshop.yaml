@@ -1,0 +1,28 @@
+# Red Bull Shop Ecommerce Testing Configuration
+# German sports merchandise and team apparel website
+
+baseUrl: "https://www.redbullshop.com"
+productUrls:
+  - "https://www.redbullshop.com/de/neuheiten/urban-sweater-m-rbb25039-red-bull-bora-hansgrohe"
+  - "https://www.redbullshop.com/de/neuheiten/spain-t-shirt-m-rbb25042-red-bull-bora-hansgrohe"
+  - "https://www.redbullshop.com/de/neuheiten/urban-hoodie-m-rbb25036-red-bull-bora-hansgrohe"
+  - "https://www.redbullshop.com/de/neuheiten/urban-t-shirt-m-rbb25038-red-bull-bora-hansgrohe"
+  - "https://www.redbullshop.com/de/neuheiten/urban-poloshirt-m-rbb25037-red-bull-bora-hansgrohe"
+timeout: 30000
+retryAttempts: 3
+viewport:
+  width: 1920
+  height: 1080
+headless: true
+customHeaders:
+  User-Agent: "ShopAudit/1.0.0"
+  Accept-Language: "de-DE,de;q=0.9,en;q=0.8"
+  Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8"
+  Accept-Encoding: "gzip, deflate, br"
+  Connection: "keep-alive"
+  Upgrade-Insecure-Requests: "1"
+cookies:
+  - name: "session_id"
+    value: "your-session-value"
+    domain: ".redbullshop.com"
+    path: "/" 
