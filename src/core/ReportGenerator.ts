@@ -106,6 +106,18 @@ export class ReportGenerator {
       });
 
       console.log(imageTable.toString());
+
+      // Print brief list of broken image URLs (top 5 per page)
+      results.imageResults.forEach(result => {
+        const broken = result.imageDetails.filter(d => d.status === 'broken' || d.status === 'failed');
+        if (broken.length > 0) {
+          console.log(chalk.gray(`  ↳ ${this.truncateUrl(result.url)}: showing up to 5 problematic images...`));
+          broken.slice(0, 5).forEach(img => {
+            const label = img.status === 'broken' ? chalk.red('[broken]') : chalk.yellow('[failed]');
+            console.log(`    ${label} ${this.truncateUrl(img.src)}${img.error ? ' - ' + img.error : ''}`);
+          });
+        }
+      });
     }
 
     // Error Detection Results
@@ -128,6 +140,24 @@ export class ReportGenerator {
       });
 
       console.log(errorTable.toString());
+
+      // Print brief list of network/resource errors (top 5 per page)
+      results.errorResults.forEach(result => {
+        const topNetwork = result.networkErrors.slice(0, 5);
+        const topResources = result.resourceErrors.slice(0, 5);
+        if (topNetwork.length > 0) {
+          console.log(chalk.gray(`  ↳ ${this.truncateUrl(result.url)}: top network errors...`));
+          topNetwork.forEach(ne => {
+            console.log(`    [${ne.status}] ${ne.method} ${this.truncateUrl(ne.url)} (${ne.resourceType})`);
+          });
+        }
+        if (topResources.length > 0) {
+          console.log(chalk.gray(`  ↳ ${this.truncateUrl(result.url)}: top resource errors...`));
+          topResources.forEach(re => {
+            console.log(`    [${re.type}] ${this.truncateUrl(re.url)} - ${re.error}`);
+          });
+        }
+      });
     }
 
     // Recommendations
@@ -140,6 +170,87 @@ export class ReportGenerator {
   }
 
   private generateHtmlContent(results: TestReport): string {
+    // Build detailed HTML fragments for image and error lists
+    const imageDetailsHtml = results.imageResults.map(result => {
+      const broken = result.imageDetails.filter(d => d.status === 'broken' || d.status === 'failed');
+      if (broken.length === 0) return '';
+      const items = broken.map(img => `
+        <tr>
+          <td>${this.escapeHtml(img.status)}</td>
+          <td><a href="${this.escapeHtml(img.src)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(this.truncateUrl(img.src))}</a></td>
+          <td>${this.escapeHtml(img.alt || '')}</td>
+          <td>${img.width}×${img.height}</td>
+          <td>${this.escapeHtml(img.error || '')}</td>
+        </tr>
+      `).join('');
+      return `
+        <h3>${this.escapeHtml(result.url)}</h3>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Status</th>
+              <th>Image URL</th>
+              <th>Alt</th>
+              <th>Dimensions</th>
+              <th>Error</th>
+            </tr>
+          </thead>
+          <tbody>${items}</tbody>
+        </table>
+      `;
+    }).join('');
+
+    const errorDetailsHtml = results.errorResults.map(result => {
+      const netRows = result.networkErrors.map(ne => `
+        <tr>
+          <td>${ne.status}</td>
+          <td>${this.escapeHtml(ne.method)}</td>
+          <td>${this.escapeHtml(ne.resourceType)}</td>
+          <td><a href="${this.escapeHtml(ne.url)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(this.truncateUrl(ne.url))}</a></td>
+          <td>${this.escapeHtml(ne.statusText)}</td>
+        </tr>
+      `).join('');
+      const resRows = result.resourceErrors.map(re => `
+        <tr>
+          <td>${this.escapeHtml(re.type)}</td>
+          <td><a href="${this.escapeHtml(re.url)}" target="_blank" rel="noopener noreferrer">${this.escapeHtml(this.truncateUrl(re.url))}</a></td>
+          <td>${this.escapeHtml(re.error)}</td>
+        </tr>
+      `).join('');
+      if (!netRows && !resRows) return '';
+      return `
+        <h3>${this.escapeHtml(result.url)}</h3>
+        ${netRows ? `
+          <h4>Network Errors</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Method</th>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Status Text</th>
+              </tr>
+            </thead>
+            <tbody>${netRows}</tbody>
+          </table>
+        ` : ''}
+        ${resRows ? `
+          <h4>Resource Errors</h4>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Type</th>
+                <th>URL</th>
+                <th>Error</th>
+              </tr>
+            </thead>
+            <tbody>${resRows}</tbody>
+          </table>
+        ` : ''}
+      `;
+    }).join('');
+
     return `
 <!DOCTYPE html>
 <html lang="en">
@@ -221,14 +332,8 @@ export class ReportGenerator {
             background: #f8f9fa;
             font-weight: 600;
         }
-        .status-pass {
-            color: #28a745;
-            font-weight: bold;
-        }
-        .status-fail {
-            color: #dc3545;
-            font-weight: bold;
-        }
+        .status-pass { color: #28a745; font-weight: bold; }
+        .status-fail { color: #dc3545; font-weight: bold; }
         .recommendations {
             background: #fff3cd;
             border: 1px solid #ffeaa7;
@@ -236,17 +341,10 @@ export class ReportGenerator {
             padding: 20px;
             margin-top: 20px;
         }
-        .recommendations h3 {
-            margin-top: 0;
-            color: #856404;
-        }
-        .recommendations ul {
-            margin: 0;
-            padding-left: 20px;
-        }
-        .recommendations li {
-            margin-bottom: 8px;
-        }
+        .recommendations h3 { margin-top: 0; color: #856404; }
+        .recommendations ul { margin: 0; padding-left: 20px; }
+        .recommendations li { margin-bottom: 8px; }
+        .sub-note { color: #666; font-size: 0.9em; }
     </style>
 </head>
 <body>
@@ -335,6 +433,10 @@ export class ReportGenerator {
                     `).join('')}
                 </tbody>
             </table>
+            ${imageDetailsHtml ? `
+              <p class="sub-note">Detailed list of problematic images (failed/broken):</p>
+              ${imageDetailsHtml}
+            ` : ''}
         </div>
 
         <div class="section">
@@ -363,6 +465,10 @@ export class ReportGenerator {
                     `).join('')}
                 </tbody>
             </table>
+            ${errorDetailsHtml ? `
+              <p class="sub-note">Detailed list of network/resource errors:</p>
+              ${errorDetailsHtml}
+            ` : ''}
         </div>
 
         ${results.summary.recommendations.length > 0 ? `
@@ -382,16 +488,17 @@ export class ReportGenerator {
   }
 
   private truncateUrl(url: string): string {
+    if (!url) return '';
     if (url.length <= 40) return url;
     return url.substring(0, 37) + '...';
   }
 
   private escapeHtml(text: string): string {
-    return text
+    return (text || '')
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
+      .replace(/\"/g, '&quot;')
       .replace(/'/g, '&#039;');
   }
 } 
