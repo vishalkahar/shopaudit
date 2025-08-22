@@ -129,10 +129,21 @@ app.get('/test/boll-branch', async (req, res) => {
 
   } catch (error) {
     console.error('Boll & Branch test failed:', error);
-    res.status(500).json({
-      error: 'Boll & Branch test failed',
-      message: error instanceof Error ? error.message : 'Unknown error'
-    });
+    
+    // Check if it's a browser initialization error
+    if (error instanceof Error && error.message.includes('Executable doesn\'t exist')) {
+      res.status(500).json({
+        error: 'Browser initialization failed',
+        message: 'Playwright browsers not properly installed. Please check the build logs.',
+        details: error.message,
+        suggestion: 'Try redeploying the service or contact support.'
+      });
+    } else {
+      res.status(500).json({
+        error: 'Boll & Branch test failed',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
   }
 });
 
@@ -175,10 +186,21 @@ app.get('/test/redbull', async (req, res) => {
 
   } catch (error) {
     console.error('Red Bull Shop test failed:', error);
-    res.status(500).json({
-      error: 'Red Bull Shop test failed',
-      message: error instanceof Error ? error.message : 'Unknown error'
-    });
+    
+    // Check if it's a browser initialization error
+    if (error instanceof Error && error.message.includes('Executable doesn\'t exist')) {
+      res.status(500).json({
+        error: 'Browser initialization failed',
+        message: 'Playwright browsers not properly installed. Please check the build logs.',
+        details: error.message,
+        suggestion: 'Try redeploying the service or contact support.'
+      });
+    } else {
+      res.status(500).json({
+        error: 'Red Bull Shop test failed',
+        message: error instanceof Error ? error.message : 'Unknown error'
+      });
+    }
   }
 });
 
