@@ -10,7 +10,8 @@ build/
 
 # Test reports
 reports/
-*.json
+package-lock.json
+# *.json
 *.html
 
 # Environment variables

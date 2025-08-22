@@ -1,0 +1,268 @@
+{
+  "timestamp": "2024-01-15T14:30:00.000Z",
+  "baseUrl": "https://www.redbullshop.com",
+  "totalTests": 15,
+  "passedTests": 13,
+  "failedTests": 2,
+  "totalDuration": 52000,
+  "productPageResults": [
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-sweater-m-rbb25039-red-bull-bora-hansgrohe",
+      "success": true,
+      "loadTime": 2800,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/spain-t-shirt-m-rbb25042-red-bull-bora-hansgrohe",
+      "success": true,
+      "loadTime": 3100,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-hoodie-m-rbb25036-red-bull-bora-hansgrohe",
+      "success": false,
+      "loadTime": 3500,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": false,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": ["description"],
+      "errors": ["Product description element not found"]
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-t-shirt-m-rbb25038-red-bull-bora-hansgrohe",
+      "success": true,
+      "loadTime": 2900,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-poloshirt-m-rbb25037-red-bull-bora-hansgrohe",
+      "success": true,
+      "loadTime": 3200,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    }
+  ],
+  "imageResults": [
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-sweater-m-rbb25039-red-bull-bora-hansgrohe",
+      "success": true,
+      "images": {
+        "total": 6,
+        "loaded": 6,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/u/r/urban-sweater-main.jpg",
+          "alt": "Urban Sweater - Red Bull BORA hansgrohe",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/spain-t-shirt-m-rbb25042-red-bull-bora-hansgrohe",
+      "success": true,
+      "images": {
+        "total": 5,
+        "loaded": 5,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/s/p/spain-t-shirt-main.jpg",
+          "alt": "Spain T-Shirt - Red Bull BORA hansgrohe",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-hoodie-m-rbb25036-red-bull-bora-hansgrohe",
+      "success": false,
+      "images": {
+        "total": 7,
+        "loaded": 6,
+        "failed": 1,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/u/r/urban-hoodie-main.jpg",
+          "alt": "",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        },
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/u/r/urban-hoodie-detail.jpg",
+          "alt": "",
+          "width": 0,
+          "height": 0,
+          "status": "failed",
+          "error": "Image failed to load"
+        }
+      ],
+      "errors": ["2 images missing alt text", "1 image failed to load"]
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-t-shirt-m-rbb25038-red-bull-bora-hansgrohe",
+      "success": true,
+      "images": {
+        "total": 4,
+        "loaded": 4,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/u/r/urban-t-shirt-main.jpg",
+          "alt": "Urban T-Shirt - Red Bull BORA hansgrohe",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-poloshirt-m-rbb25037-red-bull-bora-hansgrohe",
+      "success": true,
+      "images": {
+        "total": 5,
+        "loaded": 5,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.redbullshop.com/media/catalog/product/cache/1/image/1800x/040ec09b1e35df139433887a97daa66f/u/r/urban-poloshirt-main.jpg",
+          "alt": "Urban Poloshirt - Red Bull BORA hansgrohe",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "errorResults": [
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-sweater-m-rbb25039-red-bull-bora-hansgrohe",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/spain-t-shirt-m-rbb25042-red-bull-bora-hansgrohe",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-hoodie-m-rbb25036-red-bull-bora-hansgrohe",
+      "success": false,
+      "consoleErrors": [
+        {
+          "level": "warning",
+          "message": "Deprecated API usage detected",
+          "source": "https://www.redbullshop.com/assets/analytics.js",
+          "lineNumber": 45,
+          "columnNumber": 12
+        }
+      ],
+      "networkErrors": [
+        {
+          "url": "https://api.redbullshop.com/inventory",
+          "status": 500,
+          "statusText": "Internal Server Error",
+          "method": "GET",
+          "resourceType": "xhr"
+        }
+      ],
+      "resourceErrors": [],
+      "totalErrors": 2
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-t-shirt-m-rbb25038-red-bull-bora-hansgrohe",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    },
+    {
+      "url": "https://www.redbullshop.com/de/neuheiten/urban-poloshirt-m-rbb25037-red-bull-bora-hansgrohe",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    }
+  ],
+  "summary": {
+    "criticalIssues": 1,
+    "warnings": 2,
+    "recommendations": [
+      "Add product description to urban-hoodie-m-rbb25036",
+      "Fix 2 images missing alt text on urban-hoodie-m-rbb25036",
+      "Resolve network request failures (500 errors)",
+      "Update deprecated API usage in analytics.js"
+    ]
+  }
+} 

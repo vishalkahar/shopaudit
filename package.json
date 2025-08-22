@@ -1,0 +1,48 @@
+{
+  "name": "shopaudit",
+  "version": "1.0.0",
+  "description": "Browser test automation tool for validating ecommerce websites (Shopify/BigCommerce)",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/http-server.js",
+    "cli": "node dist/index.js",
+    "test": "npm run build && node dist/index.js",
+    "dev": "ts-node src/http-server.ts",
+    "lint": "eslint src/**/*.ts",
+    "format": "prettier --write src/**/*.ts"
+  },
+  "keywords": [
+    "ecommerce",
+    "testing",
+    "automation",
+    "shopify",
+    "bigcommerce",
+    "playwright"
+  ],
+  "author": "ShopAudit Team",
+  "license": "MIT",
+  "dependencies": {
+    "playwright": "^1.40.0",
+    "commander": "^11.1.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "cli-table3": "^0.6.3",
+    "fs-extra": "^11.1.1",
+    "yaml": "^2.3.4",
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/fs-extra": "^11.0.4",
+    "typescript": "^5.3.0",
+    "ts-node": "^10.9.0",
+    "@typescript-eslint/eslint-plugin": "^6.13.0",
+    "@typescript-eslint/parser": "^6.13.0",
+    "eslint": "^8.54.0",
+    "prettier": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+} 

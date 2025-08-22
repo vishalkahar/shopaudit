@@ -1,0 +1,180 @@
+{
+  "timestamp": "2024-01-15T10:30:00.000Z",
+  "baseUrl": "https://www.bollandbranch.com",
+  "totalTests": 9,
+  "passedTests": 7,
+  "failedTests": 2,
+  "totalDuration": 45000,
+  "productPageResults": [
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-sheet-set",
+      "success": true,
+      "loadTime": 2500,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-duvet-set",
+      "success": false,
+      "loadTime": 3200,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": false,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": ["description"],
+      "errors": ["Product description element not found"]
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/waffle-bed-blanket",
+      "success": true,
+      "loadTime": 2800,
+      "elements": {
+        "title": true,
+        "price": true,
+        "description": true,
+        "addToCartButton": true,
+        "variants": true,
+        "availability": true,
+        "metaInfo": true
+      },
+      "missingElements": [],
+      "errors": []
+    }
+  ],
+  "imageResults": [
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-sheet-set",
+      "success": true,
+      "images": {
+        "total": 8,
+        "loaded": 8,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.bollandbranch.com/cdn/shop/products/signature-hemmed-sheet-set-main.jpg",
+          "alt": "Signature Hemmed Sheet Set - Main Image",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-duvet-set",
+      "success": false,
+      "images": {
+        "total": 6,
+        "loaded": 5,
+        "failed": 1,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.bollandbranch.com/cdn/shop/products/duvet-set-main.jpg",
+          "alt": "",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        },
+        {
+          "src": "https://www.bollandbranch.com/cdn/shop/products/duvet-set-thumbnail.jpg",
+          "alt": "",
+          "width": 0,
+          "height": 0,
+          "status": "failed",
+          "error": "Image failed to load"
+        }
+      ],
+      "errors": ["2 images missing alt text", "1 image failed to load"]
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/waffle-bed-blanket",
+      "success": true,
+      "images": {
+        "total": 10,
+        "loaded": 10,
+        "failed": 0,
+        "broken": 0
+      },
+      "imageDetails": [
+        {
+          "src": "https://www.bollandbranch.com/cdn/shop/products/waffle-bed-blanket-main.jpg",
+          "alt": "Waffle Bed Blanket - Main Image",
+          "width": 800,
+          "height": 600,
+          "status": "loaded"
+        }
+      ],
+      "errors": []
+    }
+  ],
+  "errorResults": [
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-sheet-set",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/signature-hemmed-duvet-set",
+      "success": false,
+      "consoleErrors": [
+        {
+          "level": "warning",
+          "message": "Deprecated API usage detected",
+          "source": "https://www.bollandbranch.com/assets/analytics.js",
+          "lineNumber": 45,
+          "columnNumber": 12
+        }
+      ],
+      "networkErrors": [
+        {
+          "url": "https://api.bollandbranch.com/inventory",
+          "status": 500,
+          "statusText": "Internal Server Error",
+          "method": "GET",
+          "resourceType": "xhr"
+        }
+      ],
+      "resourceErrors": [],
+      "totalErrors": 2
+    },
+    {
+      "url": "https://www.bollandbranch.com/products/waffle-bed-blanket",
+      "success": true,
+      "consoleErrors": [],
+      "networkErrors": [],
+      "resourceErrors": [],
+      "totalErrors": 0
+    }
+  ],
+  "summary": {
+    "criticalIssues": 1,
+    "warnings": 2,
+    "recommendations": [
+      "Add product description to signature-hemmed-duvet-set",
+      "Fix 2 images missing alt text on signature-hemmed-duvet-set",
+      "Resolve network request failures (500 errors)",
+      "Update deprecated API usage in analytics.js"
+    ]
+  }
+} 
