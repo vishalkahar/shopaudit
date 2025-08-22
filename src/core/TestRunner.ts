@@ -27,18 +27,59 @@ export class TestRunner {
     const spinner = ora('Initializing browser...').start();
     
     try {
-      this.browser = await chromium.launch({
-        headless: this.config.headless,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-          '--disable-dev-shm-usage',
-          '--disable-accelerated-2d-canvas',
-          '--no-first-run',
-          '--no-zygote',
-          '--disable-gpu'
-        ]
-      });
+      // Try different browser executable paths for Render.com
+      const executablePaths = [
+        process.env.PLAYWRIGHT_BROWSERS_PATH ? `${process.env.PLAYWRIGHT_BROWSERS_PATH}/chromium_headless_shell-1187/chrome-linux/headless_shell` : undefined,
+        '/opt/render/.cache/ms-playwright/chromium_headless_shell-1187/chrome-linux/headless_shell',
+        '/root/.cache/ms-playwright/chromium_headless_shell-1187/chrome-linux/headless_shell',
+        '/home/render/.cache/ms-playwright/chromium_headless_shell-1187/chrome-linux/headless_shell'
+      ].filter((path): path is string => path !== undefined);
+
+      let browser: Browser | null = null;
+      let lastError: any = null;
+
+      for (const executablePath of executablePaths) {
+        try {
+          console.log(`Trying browser path: ${executablePath}`);
+          browser = await chromium.launch({
+            headless: this.config.headless,
+            executablePath,
+            args: [
+              '--no-sandbox',
+              '--disable-setuid-sandbox',
+              '--disable-dev-shm-usage',
+              '--disable-accelerated-2d-canvas',
+              '--no-first-run',
+              '--no-zygote',
+              '--disable-gpu'
+            ]
+          });
+          console.log(`Successfully launched browser from: ${executablePath}`);
+          break;
+        } catch (error) {
+          console.log(`Failed to launch browser from ${executablePath}:`, error);
+          lastError = error;
+        }
+      }
+
+      if (!browser) {
+        // Fallback to default launch
+        console.log('Trying default browser launch...');
+        browser = await chromium.launch({
+          headless: this.config.headless,
+          args: [
+            '--no-sandbox',
+            '--disable-setuid-sandbox',
+            '--disable-dev-shm-usage',
+            '--disable-accelerated-2d-canvas',
+            '--no-first-run',
+            '--no-zygote',
+            '--disable-gpu'
+          ]
+        });
+      }
+
+      this.browser = browser;
 
       this.context = await this.browser.newContext({
         viewport: this.config.viewport,

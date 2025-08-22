@@ -13,10 +13,19 @@ npm install
 echo "🌐 Installing Playwright browsers..."
 npx playwright install --with-deps chromium
 
+# Force reinstall if needed
+echo "🔄 Ensuring browser installation..."
+npx playwright install chromium --force
+
 # Verify browser installation
 echo "✅ Verifying browser installation..."
 npx playwright --version
-ls -la /opt/render/.cache/ms-playwright/ || echo "Browser cache directory not found, this is normal during build"
+
+# Check browser paths
+echo "🔍 Checking browser paths..."
+find /opt/render/.cache/ms-playwright/ -name "*chromium*" -type f 2>/dev/null || echo "No chromium found in cache"
+find /root/.cache/ms-playwright/ -name "*chromium*" -type f 2>/dev/null || echo "No chromium found in root cache"
+find /home/render/.cache/ms-playwright/ -name "*chromium*" -type f 2>/dev/null || echo "No chromium found in home cache"
 
 # Build TypeScript
 echo "🔨 Building TypeScript..."
